@@ -1,53 +1,17 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Minus, Plus, Trash } from 'lucide-react';
+import { CartItem } from '@/pages/Cart';
 
-// Sample cart data
-const initialCartItems = [
-  {
-    id: 1,
-    name: 'Grilled Chicken Salad',
-    price: 12.99,
-    quantity: 1,
-    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop&auto=format',
-  },
-  {
-    id: 2,
-    name: 'Vegetable Stir Fry',
-    price: 10.50,
-    quantity: 2,
-    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=500&fit=crop&auto=format',
-  },
-  {
-    id: 3,
-    name: 'Fresh Fruit Smoothie',
-    price: 5.99,
-    quantity: 1,
-    image: 'https://images.unsplash.com/photo-1525385133512-2f3bdd039054?w=500&h=500&fit=crop&auto=format',
-  }
-];
+interface CartItemsProps {
+  cartItems: CartItem[];
+  updateQuantity: (id: number, increment: boolean) => void;
+  removeItem: (id: number) => void;
+}
 
-const CartItems = () => {
-  const [cartItems, setCartItems] = useState(initialCartItems);
-
-  const updateQuantity = (id: number, increment: boolean) => {
-    setCartItems(cartItems.map(item => {
-      if (item.id === id) {
-        return {
-          ...item,
-          quantity: increment ? item.quantity + 1 : Math.max(1, item.quantity - 1)
-        };
-      }
-      return item;
-    }));
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
-  };
-
+const CartItems = ({ cartItems, updateQuantity, removeItem }: CartItemsProps) => {
   if (cartItems.length === 0) {
     return (
       <Card className="mb-8">

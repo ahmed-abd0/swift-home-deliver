@@ -1,17 +1,29 @@
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CreditCard } from 'lucide-react';
+import { CartItem } from '@/pages/Cart';
 
-const OrderSummary = () => {
-  // Sample order summary data
-  const summary = {
-    subtotal: 39.97,
-    deliveryFee: 3.99,
-    tax: 2.80,
-    total: 46.76
-  };
+interface OrderSummaryProps {
+  cartItems: CartItem[];
+}
+
+const OrderSummary = ({ cartItems }: OrderSummaryProps) => {
+  // Calculate order summary dynamically based on cart items
+  const summary = useMemo(() => {
+    const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const deliveryFee = subtotal > 0 ? 3.99 : 0;
+    const tax = subtotal * 0.07; // 7% tax rate
+    const total = subtotal + deliveryFee + tax;
+    
+    return {
+      subtotal,
+      deliveryFee,
+      tax,
+      total
+    };
+  }, [cartItems]);
 
   return (
     <Card>
@@ -44,7 +56,10 @@ const OrderSummary = () => {
       </CardContent>
       
       <CardFooter className="p-6 pt-0">
-        <Button className="w-full bg-delivery-primary hover:bg-delivery-primary/90 gap-2">
+        <Button 
+          className="w-full bg-delivery-primary hover:bg-delivery-primary/90 gap-2"
+          disabled={cartItems.length === 0}
+        >
           <CreditCard className="h-4 w-4" />
           <span>Proceed to Checkout</span>
         </Button>
