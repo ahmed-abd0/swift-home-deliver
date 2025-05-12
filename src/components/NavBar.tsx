@@ -1,10 +1,16 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { User, Package, Home, ShoppingCart } from 'lucide-react';
 
 const NavBar = () => {
+  const location = useLocation();
+  
+  const isActive = (path: string) => {
+    return location.pathname === path ? 'text-delivery-primary' : 'text-delivery-dark';
+  };
+
   return (
     <header className="sticky top-0 z-40 w-full bg-white border-b border-delivery-secondary shadow-sm">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
@@ -13,22 +19,24 @@ const NavBar = () => {
           <span className="font-bold text-xl text-delivery-dark">DeliverEase</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
-          <Link to="/" className="text-sm font-medium flex items-center gap-1 text-delivery-dark hover:text-delivery-primary transition-colors">
+          <Link to="/" className={`text-sm font-medium flex items-center gap-1 ${isActive('/')} hover:text-delivery-primary transition-colors`}>
             <Home className="w-4 h-4" />
             <span>Home</span>
           </Link>
-          <Link to="/orders" className="text-sm font-medium flex items-center gap-1 text-delivery-dark hover:text-delivery-primary transition-colors">
+          <Link to="/orders" className={`text-sm font-medium flex items-center gap-1 ${isActive('/orders')} hover:text-delivery-primary transition-colors`}>
             <Package className="w-4 h-4" />
             <span>My Orders</span>
           </Link>
-          <Link to="/cart" className="text-sm font-medium flex items-center gap-1 text-delivery-dark hover:text-delivery-primary transition-colors">
+          <Link to="/cart" className={`text-sm font-medium flex items-center gap-1 ${isActive('/cart')} hover:text-delivery-primary transition-colors`}>
             <ShoppingCart className="w-4 h-4" />
             <span>Cart</span>
           </Link>
         </nav>
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="rounded-full">
-            <ShoppingCart className="h-5 w-5 text-delivery-dark" />
+          <Button variant="ghost" size="icon" className="rounded-full" asChild>
+            <Link to="/cart">
+              <ShoppingCart className="h-5 w-5 text-delivery-dark" />
+            </Link>
           </Button>
           <Button variant="outline" size="sm" className="rounded-full border-delivery-primary text-delivery-primary hover:bg-delivery-secondary">
             <User className="h-4 w-4 mr-2" />
