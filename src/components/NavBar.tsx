@@ -1,0 +1,43 @@
+
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { User, Package, Home, ShoppingCart } from 'lucide-react';
+
+const NavBar = () => {
+  return (
+    <header className="sticky top-0 z-40 w-full bg-white border-b border-delivery-secondary shadow-sm">
+      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+        <Link to="/" className="flex items-center space-x-2">
+          <Package className="h-6 w-6 text-delivery-primary" />
+          <span className="font-bold text-xl text-delivery-dark">DeliverEase</span>
+        </Link>
+        <nav className="hidden md:flex items-center gap-6">
+          <Link to="/" className="text-sm font-medium flex items-center gap-1 text-delivery-dark hover:text-delivery-primary transition-colors">
+            <Home className="w-4 h-4" />
+            <span>Home</span>
+          </Link>
+          <Link to="/orders" className="text-sm font-medium flex items-center gap-1 text-delivery-dark hover:text-delivery-primary transition-colors">
+            <Package className="w-4 h-4" />
+            <span>My Orders</span>
+          </Link>
+          <Link to="/cart" className="text-sm font-medium flex items-center gap-1 text-delivery-dark hover:text-delivery-primary transition-colors">
+            <ShoppingCart className="w-4 h-4" />
+            <span>Cart</span>
+          </Link>
+        </nav>
+        <div className="flex items-center gap-4">
+          <Button variant="ghost" size="icon" className="rounded-full">
+            <ShoppingCart className="h-5 w-5 text-delivery-dark" />
+          </Button>
+          <Button variant="outline" size="sm" className="rounded-full border-delivery-primary text-delivery-primary hover:bg-delivery-secondary">
+            <User className="h-4 w-4 mr-2" />
+            <span>Sign in</span>
+          </Button>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default NavBar;
