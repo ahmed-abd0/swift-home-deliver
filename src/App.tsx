@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Orders from "./pages/Orders";
 import Cart from "./pages/Cart";
+import Product from "./pages/Product";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,13 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<Product />} />
+          
+          {/* Intentional 404 routes */}
+          <Route path="/account" element={<NotFound />} />
+          <Route path="/favorites" element={<NotFound />} />
+          <Route path="/settings" element={<NotFound />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

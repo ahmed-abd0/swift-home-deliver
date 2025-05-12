@@ -31,6 +31,16 @@ const NavBar = () => {
             <ShoppingCart className="w-4 h-4" />
             <span>Cart</span>
           </Link>
+          <Link to="/product/1" className={`text-sm font-medium ${isActive('/product/1')} hover:text-delivery-primary transition-colors`}>
+            Featured Item
+          </Link>
+          {/* Intentional 404 links */}
+          <Link to="/account" className={`text-sm font-medium ${isActive('/account')} hover:text-delivery-primary transition-colors`}>
+            Account
+          </Link>
+          <Link to="/favorites" className={`text-sm font-medium ${isActive('/favorites')} hover:text-delivery-primary transition-colors`}>
+            Favorites
+          </Link>
         </nav>
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" className="rounded-full" asChild>
