@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
-import { User, Package, Home, ShoppingCart } from 'lucide-react';
+import { User, Package, Home, ShoppingCart, Heart, Settings } from 'lucide-react';
 
 const NavBar = () => {
   const location = useLocation();
@@ -31,21 +31,33 @@ const NavBar = () => {
             <ShoppingCart className="w-4 h-4" />
             <span>Cart</span>
           </Link>
-          <Link to="/product/1" className={`text-sm font-medium ${isActive('/product/1')} hover:text-delivery-primary transition-colors`}>
-            Featured Item
+          <Link to="/product/1" className={`text-sm font-medium flex items-center gap-1 ${isActive('/product/1')} hover:text-delivery-primary transition-colors`}>
+            <Package className="w-4 h-4" />
+            <span>Featured Item</span>
           </Link>
           {/* Intentional 404 links */}
-          <Link to="/account" className={`text-sm font-medium ${isActive('/account')} hover:text-delivery-primary transition-colors`}>
-            Account
+          <Link to="/account" className={`text-sm font-medium flex items-center gap-1 ${isActive('/account')} hover:text-delivery-primary transition-colors`}>
+            <User className="w-4 h-4" />
+            <span>Account</span>
           </Link>
-          <Link to="/favorites" className={`text-sm font-medium ${isActive('/favorites')} hover:text-delivery-primary transition-colors`}>
-            Favorites
+          <Link to="/favorites" className={`text-sm font-medium flex items-center gap-1 ${isActive('/favorites')} hover:text-delivery-primary transition-colors`}>
+            <Heart className="w-4 h-4" />
+            <span>Favorites</span>
+          </Link>
+          <Link to="/settings" className={`text-sm font-medium flex items-center gap-1 ${isActive('/settings')} hover:text-delivery-primary transition-colors`}>
+            <Settings className="w-4 h-4" />
+            <span>Settings</span>
           </Link>
         </nav>
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" className="rounded-full" asChild>
             <Link to="/cart">
               <ShoppingCart className="h-5 w-5 text-delivery-dark" />
+            </Link>
+          </Button>
+          <Button variant="ghost" size="icon" className="rounded-full" asChild>
+            <Link to="/favorites">
+              <Heart className="h-5 w-5 text-delivery-dark" />
             </Link>
           </Button>
           <Button variant="outline" size="sm" className="rounded-full border-delivery-primary text-delivery-primary hover:bg-delivery-secondary">
